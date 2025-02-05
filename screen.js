@@ -1,1 +1,20 @@
-document.addEventListener("DOMContentLoaded", function() { function enterFullscreen() { let elem = document.documentElement; if (elem.requestFullscreen) { elem.requestFullscreen(); } else if (elem.mozRequestFullScreen) { mozRequestFullScreen(); } else if (elem.webkitRequestFullscreen) {  elem.webkitRequestFullscreen(); } else if (elem.msRequestFullscreen) {  elem.msRequestFullscreen(); }  document.removeEventListener("click", enterFullscreen); document.removeEventListener("touchstart", enterFullscreen); }  document.addEventListener("click", enterFullscreen); document.addEventListener("touchstart", enterFullscreen); });
+document.addEventListener("DOMContentLoaded", () => {
+    const requestFullScreen = () => {
+        const elem = document.documentElement; // Весь документ
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.mozRequestFullScreen) { // Firefox
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) { // Chrome, Safari
+            elem.webkitRequestFullscreen();
+        } else if (elem.msRequestFullscreen) { // IE/Edge
+            elem.msRequestFullscreen();
+        }
+
+        // После первого касания удаляем обработчик, чтобы не срабатывать повторно
+        document.removeEventListener("touchstart", requestFullScreen);
+    };
+
+    // Включаем fullscreen при первом касании экрана
+    document.addEventListener("touchstart", requestFullScreen);
+});
