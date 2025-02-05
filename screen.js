@@ -18,3 +18,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // Включаем fullscreen при первом касании экрана
     document.addEventListener("touchstart", requestFullScreen);
 });
+
+document.addEventListener("touchstart", () => {
+    setTimeout(() => {
+        window.scrollTo(0, 1); // Убираем адресную строку
+    }, 10);
+});
+
