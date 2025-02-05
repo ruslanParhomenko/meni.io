@@ -19,9 +19,16 @@
 //     document.addEventListener("touchstart", requestFullScreen);
 // });
 
-document.addEventListener("touchstart", () => {
-    setTimeout(() => {
-        window.scrollTo(0, 1); // Убираем адресную строку
-    }, 10);
+document.addEventListener("DOMContentLoaded", () => {
+    const hideAddressBar = () => {
+        window.scrollTo(0, 1); // Прокручиваем немного вниз
+    };
+
+    // Вызываем при первом касании
+    document.addEventListener("touchstart", hideAddressBar);
+
+    // Если страница загружена с прокруткой — ждем и скрываем
+    setTimeout(hideAddressBar, 100);
 });
+
 
